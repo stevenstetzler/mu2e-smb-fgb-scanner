@@ -1,0 +1,2 @@
+	Left				Fiber 1					Fiber 2					Fiber 3					Fiber 4					Right
+FGB Num	x (mm)	y (mm)	radius (mm)	~	flagged	x (mm)	y (mm)	radius (mm)	~	flagged	x (mm)	y (mm)	radius (mm)	~	flagged	x (mm)	y (mm)	radius (mm)	~	flagged	x (mm)	y (mm)	radius (mm)	~	flagged	x (mm)	y (mm)	radius (mm)	~	flagged	
