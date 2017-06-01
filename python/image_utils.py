@@ -2,7 +2,7 @@ import cv2
 from class_defs import rect
 import numpy as np
 from file_utils import print_measurements_to_file
-from file_utils import print_image_to_file
+from file_utils import print_images_to_file
 
 bar_rect_list = []
 for i in range(11):
@@ -20,7 +20,6 @@ hole_rect_list.append(rect(8350, 400, 700, 700))
 
 
 def show_image(image, title):
-	return
 	cv2.imshow(title, image)
 	cv2.waitKey(0)
 	cv2.destroyAllWindows()
@@ -28,9 +27,14 @@ def show_image(image, title):
 
 def measure_new_image(new_image, bar_nums, bar_is_smb=True):
 	bar_images = get_bars(new_image)
+	problem_bars = []
 	for bar, bar_num in zip(bar_images, bar_nums):
 		print("Measuring bar " + str(bar_num))
-		show_image(cv2.resize(bar, (int(bar.shape[1]/10), int(bar.shape[0]/10))), "Bar")
+		# show_image(cv2.resize(bar, (int(bar.shape[1]/10), int(bar.shape[0]/10))), "Bar")
+		# print_image_to_file(bar, bar_num, -1, bar_is_smb)
+
+		images_to_print = []
+		images_to_print.append(bar)
 
 		holes = get_holes(bar)
 		measurements = []
@@ -41,21 +45,29 @@ def measure_new_image(new_image, bar_nums, bar_is_smb=True):
 			for hole, crop in holes:
 				if i == 0:
 					measurement, drawn_img = measure_circle(hole, crop.x(), crop.y())
-					measurement.append(0)
 					measurements.append(measurement)
 				else:
 					measurement, drawn_img = measure_square(hole, crop.x(), crop.y())
 					measurements.append(measurement)
-				print_image_to_file(drawn_img, bar_num, i)
+				# print_image_to_file(drawn_img, bar_num, i, bar_is_smb)
+				images_to_print.append(drawn_img)
 				i += 1
 		else:
 			for hole, crop in holes:
 				measurement, drawn_img = measure_circle(hole, crop.x(), crop.y())
 				measurements.append(measurement)
-				print_image_to_file(drawn_img, bar_num, i)
+				# print_image_to_file(drawn_img, bar_num, i, bar_is_smb)
+				images_to_print.append(drawn_img)
 				i += 1
-
+		for hole_num in range(len(measurements)):
+			if -1 in measurements[hole_num]:
+				problem_bars.append("[Bar " + str(bar_num) + " Hole " + str(hole_num) + "]")
+		print_images_to_file(images_to_print, bar_num, bar_is_smb)
 		print_measurements_to_file(measurements, bar_num, is_smb=bar_is_smb)
+	if len(problem_bars) > 0:
+		print("There was a problem with the bars")
+		for b in problem_bars:
+			print(str(b))
 
 
 def is_out_of_bounds(x, y, width, height):
@@ -85,7 +97,7 @@ def get_holes(image):
 	holes = []
 	for crop in hole_rect_list:
 		candidate_hole = image[crop.y():crop.y() + crop.height(), crop.x():crop.x() + crop.width()]
-		show_image(candidate_hole, "Candidate")
+		# show_image(candidate_hole, "Candidate")
 		better_rect = get_good_crop_rect(candidate_hole)
 		if better_rect is not None:
 			candidate_hole = image[crop.y() + better_rect.y():crop.y() + better_rect.y() + better_rect.height(), crop.x() + better_rect.x():crop.x() + better_rect.x() + better_rect.width()]
@@ -124,14 +136,14 @@ def measure_circle(img, x_offset, y_offset):
 			center_y = sum([circle[1] for circle in good_circles]) / len(good_circles)
 			radius = sum([circle[2] for circle in good_circles]) / len(good_circles)
 		else:
-			return [x_offset, y_offset, -1], img.copy()
+			return [-1, -1, -1], img.copy()
 		# print("Found average circle: (" + str(center_x) + ", " + str(center_y) + ", " + str(radius))
 		return_img = img.copy()
 		cv2.circle(return_img, (int(center_x), int(center_y)), int(radius), (0, 255, 0), 2)
 		# show_image(return_img, "Circle")
 		return [center_x + x_offset, center_y + y_offset, radius], return_img
 	else:
-		return [x_offset, y_offset, -1], img.copy()
+		return [-1, -1, -1], img.copy()
 
 
 def measure_square(img, x_offset, y_offset):
