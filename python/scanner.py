@@ -21,14 +21,14 @@ print("")
 bar_nums_left = []
 bar_nums_right = []
 
-bar_type = input("What type of bar are you measuring? Answer smb / fgb: ")
+bar_type = raw_input("What type of bar are you measuring? Answer smb / fgb: ")
 while bar_type != 'smb' and bar_type != 'fgb':
-	bar_type = input("What type of bar are you measuring? Answer smb / fgb: ")
+	bar_type = raw_input("What type of bar are you measuring? Answer smb / fgb: ")
 bar_is_smb = bar_type == 'smb' and bar_type != 'fgb'
 
-use_default = input("Would you like to use default values for the bar numbers (for testing only)? Answer (y)es / (n)o: ")
+use_default = raw_input("Would you like to use default values for the bar numbers (for testing only)? Answer (y)es / (n)o: ")
 while use_default != 'yes' and use_default != 'y' and use_default != 'no' and use_default != 'n':
-	use_default = input("Would you like to use default values for the bar numbers (for testing only)? Answer (y)es / (n)o: ")
+	use_default = raw_input("Would you like to use default values for the bar numbers (for testing only)? Answer (y)es / (n)o: ")
 
 if use_default == 'yes' or use_default == 'y':
 	for i in range(1, 12):
@@ -37,8 +37,8 @@ if use_default == 'yes' or use_default == 'y':
 else:
 	print("\tLEFT\tRIGHT")
 	for i in range(1, 12):
-		print("Row " + str(i) + "\t", end='')
-		nums = input("")
+		print("Row " + str(i) + "\t",)
+		nums = raw_input("")
 		left_and_right = nums.split()
 		left = left_and_right[0]
 		right = left_and_right[1]

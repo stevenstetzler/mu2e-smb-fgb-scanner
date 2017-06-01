@@ -13,11 +13,14 @@ def modify_measurements(measurements):
 	# transform all of the measurements to these coordinates
 	slope = (measurements[5][1] - zero_y) / (measurements[5][0] - zero_x)
 	for measurement in measurements:
-		measurement[0] -= zero_x
-		measurement[1] -= zero_y + slope*measurement[0]
+		if measurement[0] != '-':
+			measurement[0] -= zero_x
+		if measurement[1] != '-':
+			measurement[1] -= zero_y + slope*measurement[0]
 	for measurement in measurements:
 		for i in range(len(measurement)):
-			measurement[i] *= 25.4 / 2400.
+			if measurement[i] != '-':
+				measurement[i] *= 25.4 / 2400.
 
 
 def print_measurements_to_file(measurements, bar_num, is_smb):
@@ -28,8 +31,8 @@ def print_measurements_to_file(measurements, bar_num, is_smb):
 		else:
 			out_file = open(filename, 'w+')
 			out_file.write(
-				"\tLeft Hole\t\t\t\tSquare 1\t\t\t\t\tSquare 2\t\t\t\t\tSquare 3\t\t\t\t\tSquare 4\t\t\t\t\tRight Hole\n");
-			out_file.write("Bar Num\t");
+				"\tLeft Hole\t\t\t\tSquare 1\t\t\t\t\tSquare 2\t\t\t\t\tSquare 3\t\t\t\t\tSquare 4\t\t\t\t\tRight Hole\n")
+			out_file.write("Bar Num\t")
 			out_file.write("x (mm)\ty (mm)\tradius (mm)\tflagged\t")
 			out_file.write("x (mm)\ty (mm)\twidth (mm)\theight (mm)\tflagged\t")
 			out_file.write("x (mm)\ty (mm)\twidth (mm)\theight (mm)\tflagged\t")
@@ -43,8 +46,8 @@ def print_measurements_to_file(measurements, bar_num, is_smb):
 		else:
 			out_file = open(filename, 'w+')
 			out_file.write(
-				"\tLeft Hole\t\t\t\tFiber 1\t\t\t\tFiber 2\t\t\t\tFiber 3\t\t\t\tFiber 4\t\t\t\tRight Hole\n");
-			out_file.write("Bar Num\t");
+				"\tLeft Hole\t\t\t\tFiber 1\t\t\t\tFiber 2\t\t\t\tFiber 3\t\t\t\tFiber 4\t\t\t\tRight Hole\n")
+			out_file.write("Bar Num\t")
 			out_file.write("x (mm)\ty (mm)\tradius (mm)\tflagged\t")
 			out_file.write("x (mm)\ty (mm)\tradius (mm)\tflagged\t")
 			out_file.write("x (mm)\ty (mm)\tradius (mm)\tflagged\t")
@@ -52,15 +55,17 @@ def print_measurements_to_file(measurements, bar_num, is_smb):
 			out_file.write("x (mm)\ty (mm)\tradius (mm)\tflagged\t")
 			out_file.write("x (mm)\ty (mm)\tradius (mm)\tflagged\n")
 
+	for measurement in measurements:
+		for i in range(len(measurement)):
+			if measurement[i] < 0:
+				measurement[i] = '-'
+
 	modify_measurements(measurements)
 	line = ''
 	line += str(bar_num) + '\t'
 	for measurement in measurements:
 		for data in measurement:
-			if data < 0:
-				data = '-'
 			line += str(data) + '\t'
-		# Flagging should be here
 		line += '\t'
 	line += '\n'
 	out_file.write(line)
