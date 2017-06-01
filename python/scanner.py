@@ -10,11 +10,13 @@ if len(sys.argv) != 2:
 file_utils.create_path_structure()
 
 filename = sys.argv[1]
-
+print("")
 print("INSTRUCTIONS")
+print("")
 print("Input the numbers of the bars you want to measure.")
 print("Ensure the laptop screen and the blue buttons on the scanner are facing you.")
-print("___________________________________________________________")
+print("Enter a value of -1 for each slot which is not filled")
+print("")
 
 bar_nums_left = []
 bar_nums_right = []

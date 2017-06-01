@@ -22,7 +22,7 @@ def modify_measurements(measurements):
 
 def print_measurements_to_file(measurements, bar_num, is_smb):
 	if is_smb:
-		filename = "measurements\\measurement_smb.txt"
+		filename = "measurements\\smb_measurements.txt"
 		if os.path.isfile(filename):
 			out_file = open(filename, 'a+')
 		else:
@@ -37,7 +37,7 @@ def print_measurements_to_file(measurements, bar_num, is_smb):
 			out_file.write("x (mm)\ty (mm)\twidth (mm)\theight (mm)\tflagged\t")
 			out_file.write("x (mm)\ty (mm)\twidth (mm)\theight (mm)\tflagged\n")
 	else:
-		filename = "measurements\\measurement_fgb.txt"
+		filename = "measurements\\fgb_measurements.txt"
 		if os.path.isfile(filename):
 			out_file = open(filename, 'a+')
 		else:
