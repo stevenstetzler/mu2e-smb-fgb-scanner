@@ -21,7 +21,7 @@ Operation Instructions:
 
 The directory `python/images` is provided as a place to store the images from the scanner.
 
-It is not required that iamges be placed here, as long as you have the pathname of the new images. 
+It is not required that images be placed here, as long as you have the pathname of the new images. 
 
 Images of the scanned bars and holes are stored in `python/measurements/smb_images` and `python/measurements/fgb_images`. 
 
