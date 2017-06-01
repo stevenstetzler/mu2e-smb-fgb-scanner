@@ -7,6 +7,7 @@ Software Requirements:
 - Scanning Software. For the Epson Perfection V39 scanner in the lab, [this software](https://ftp.epson.com/drivers/epson17634.exe) is recommended.
 
 Installation Instructions:
+
 The easiest way to install the required software is using Anaconda.
 - Download and install Anaconda with Python 3 [here](https://www.continuum.io/downloads)
 - Open a command prompt and run `conda install -c conda-forge opencv=3.2.0`
@@ -18,6 +19,10 @@ Operation Instructions:
 4. Run: `python scanner.py [path_to_new_image]`.
 5. Follow the instructions at the command prompt to complete image analysis.
 
-- The directory `python/images` is provided as a place to store the images from the scanner. It is not required that iamges be placed here, as long as you have the pathname of the new images.
-- Images of the scanned bars and holes are stored in `python/measurements/smb_images` and `python/measurements/fgb_images`.
-- Measurements for each of the holes in the bar are stored in `python/measurements/smb_measurements.txt` and `python/measurements/smb_measurements.txt`.
+The directory `python/images` is provided as a place to store the images from the scanner.
+
+It is not required that iamges be placed here, as long as you have the pathname of the new images. 
+
+Images of the scanned bars and holes are stored in `python/measurements/smb_images` and `python/measurements/fgb_images`. 
+
+Measurements for each of the holes in the bar are stored in `python/measurements/smb_measurements.txt` and `python/measurements/smb_measurements.txt`.
