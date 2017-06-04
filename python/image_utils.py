@@ -110,9 +110,17 @@ def get_good_crop_rect(image):
 	blurred = cv2.GaussianBlur(image, (5, 5), 3, None, 3)
 	# Use the canny edge detector to find edges in the image
 	edge = cv2.Canny(blurred, 100, 200)
+
+	if show_images:
+		show_image(edge, "Canny edge image")
+
 	# Dilate the edges to make them wider, possibly connecting unconnected contours of the hole
 	kernel = np.ones((9, 9), np.uint8)
 	edge = cv2.dilate(edge, kernel, iterations=1)
+
+	if show_images:
+		show_image(edge, "Dilated edge image")
+
 	# Find contours (areas of connected white pixels) in the edge image
 	(_, contours, _) = cv2.findContours(edge, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
