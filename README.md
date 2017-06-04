@@ -3,7 +3,7 @@ Software developed to measure SiPM Mounting Blocks and Fiber Guide Bars for dico
 
 Software Requirements:
 - [Python 2.7](https://www.python.org/downloads/)
-- OpenCV 3.2.0
+- [OpenCV 3.2.0](http://opencv.org/releases.html)
 - Scanning Software. For the Epson Perfection V39 scanner in the lab, [this software](https://ftp.epson.com/drivers/epson17634.exe) is recommended.
 
 Installation Instructions:
