@@ -25,4 +25,4 @@ It is not required that images be placed here, as long as you have the pathname 
 
 Images of the scanned bars and holes are stored in `python/measurements/smb_images` and `python/measurements/fgb_images`. 
 
-Measurements for each of the holes in each of the bars are stored in `python/measurements/smb_measurements.txt` and `python/measurements/smb_measurements.txt`.
+Measurements for each of the holes in each of the bars are stored in `python/measurements/smb_measurements.txt` and `python/measurements/fgb_measurements.txt`.

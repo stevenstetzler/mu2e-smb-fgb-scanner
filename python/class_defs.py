@@ -1,3 +1,4 @@
+# A definition of a rectangle for utility
 class rect:
 	def __init__(self, x, y, width, height):
 		self.__x = x

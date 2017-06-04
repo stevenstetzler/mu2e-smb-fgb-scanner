@@ -1822,8 +1822,9 @@ public class ScannerUI extends javax.swing.JFrame {
             configPicturePath = chooser.getSelectedFile().getAbsoluteFile();
             currConfigPictureText.setText(configPicturePath.toString());
             try {
-                configImage = imread(configPicturePath.toString(),CvType.CV_8UC1);
-                loadConfigurationPicture();
+                configImage = imread(configPicturePath.toString(), CvType.CV_8UC1);
+                
+//                loadConfigurationPicture();
                 splitConfigPicture();
             } catch(CvException e) {
                 debugPrint(e.getMessage());
@@ -3728,6 +3729,9 @@ public class ScannerUI extends javax.swing.JFrame {
         }
         if (configImage != null) {
             System.out.println("Width: " + configImage.width() + " Height: " + configImage.height() + " Type: " + configImage.type() + " Gray: " + BufferedImage.TYPE_BYTE_GRAY);
+            configLeft = new Mat(configImage, largeImageCropRects.get(0));
+            configRight = new Mat(configImage, largeImageCropRects.get(11));
+
             for (int i = 0; i < 12; i++) {
                 Mat im;
                 if (i < 6) {
