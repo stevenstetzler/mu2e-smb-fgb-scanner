@@ -1,2 +1,4 @@
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
+python/.idea/ export-ignore
+python/__pycache/ export-ignore
